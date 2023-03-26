@@ -11,7 +11,8 @@ class SectionTop extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
