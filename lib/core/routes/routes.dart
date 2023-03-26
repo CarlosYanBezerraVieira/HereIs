@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hereis/pages/splash_page.dart';
 
-import '../../pages/home_page.dart';
+import '../../pages/home/home_page.dart';
 
 class Routes {
   static const splashPage = "/";
