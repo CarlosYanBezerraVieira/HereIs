@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/pages/home/sections/section_top/widget/card_of_filter.dart';
 import 'package:hereis/pages/home/sections/section_top/widget/text_field_widget.dart';
+
+import 'widget/card_of_filter.dart';
 
 class SectionTop extends StatelessWidget {
   const SectionTop({Key? key}) : super(key: key);
