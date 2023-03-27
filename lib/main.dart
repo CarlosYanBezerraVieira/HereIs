@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hereis/repositoreis/cep_repository.dart';
+import 'package:provider/provider.dart';
 
 import 'core/routes/routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CepRepository(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
