@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hereis/core/routes/enums/filter_of_ceps_enum.dart';
 import 'package:hereis/pages/home/sections/section_top/widget/text_field_widget.dart';
 
 import 'widget/card_of_filter.dart';
 
 class SectionTop extends StatelessWidget {
-  const SectionTop({Key? key}) : super(key: key);
+  final Function({required TypesOfCepsEnum value}) changeFilter;
+  final TypesOfCepsEnum selectedFilter;
+  const SectionTop(
+      {Key? key, required this.changeFilter, required this.selectedFilter})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +29,14 @@ class SectionTop extends StatelessWidget {
               Wrap(
                 spacing: 12,
                 children: [
-                  CardOfFilter(
-                    label: 'Todos',
-                    onPressed: () {},
-                    selected: true,
-                  ),
-                  CardOfFilter(
-                    label: 'Histórico',
-                    onPressed: () {},
-                    selected: false,
-                  ),
-                  CardOfFilter(
-                    label: 'Salvos',
-                    onPressed: () {},
-                    selected: false,
+                  ...TypesOfCepsEnum.values.map(
+                    (filter) => CardOfFilter(
+                      label: filter.label,
+                      selected: filter == selectedFilter,
+                      onPressed: () => changeFilter(
+                        value: filter,
+                      ),
+                    ),
                   ),
                 ],
               )
