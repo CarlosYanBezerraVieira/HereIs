@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/models/item_model.dart';
+import 'package:hereis/models/cep_model.dart';
 
 class ItemCard extends StatelessWidget {
-  final ItemModel model;
+  final CepModel model;
   const ItemCard({Key? key, required this.model}) : super(key: key);
 
   @override
@@ -45,7 +45,8 @@ class ItemCard extends StatelessWidget {
                 Text(
                   model.street,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
                   ),
                 ),
                 const SizedBox(
@@ -64,9 +65,10 @@ class ItemCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Text(
-                      " | ",
-                    ),
+                    if (model.city.isNotEmpty && model.neighborhood.isNotEmpty)
+                      const Text(
+                        " | ",
+                      ),
                     Flexible(
                       flex: 1,
                       child: Text(

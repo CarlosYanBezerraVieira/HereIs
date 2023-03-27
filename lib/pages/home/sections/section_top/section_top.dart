@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/core/routes/enums/filter_of_ceps_enum.dart';
+import 'package:hereis/core/routes/enums/type_of_ceps_enum.dart';
 import 'package:hereis/pages/home/sections/section_top/widget/text_field_widget.dart';
 
 import 'widget/card_of_filter.dart';
