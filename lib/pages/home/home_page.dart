@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
                   changeFilter: ({required TypesOfCepsEnum value}) {},
                 ),
                 Expanded(
-                    child: SectionListOfItems(
+                    child: SectionListOfCards(
                   ceps: cepRepository.ceps,
                 )),
               ],
