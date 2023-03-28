@@ -9,7 +9,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
-      padding: const EdgeInsets.only(top: 24, left: 24, right: 10),
+      padding: const EdgeInsets.only(top: 12, left: 24, right: 10),
       height: 150,
       width: width,
       decoration: BoxDecoration(
