@@ -23,7 +23,7 @@ class ItemCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: const Color(0xff1B1E23),
-                child: Text(model.state),
+                child: Text(model.uf),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 12),

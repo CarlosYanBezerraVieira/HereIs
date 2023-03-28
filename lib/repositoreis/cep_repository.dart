@@ -19,9 +19,9 @@ class CepRepository extends ChangeNotifier {
           cep: 'a',
           street: 'b',
           city: 'c',
-          state: 'd',
+          uf: 'd',
           neighborhood: 'f',
-          complemento: 'g',
+          complement: 'g',
           ddd: 'i'),
     ]);
   }
