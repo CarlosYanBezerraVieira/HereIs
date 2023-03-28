@@ -37,8 +37,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           color: const Color(0xff2c313a),
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        style: const TextStyle(color: Colors.white),
         controller: searchController,
-        cursorColor: Colors.black,
+        cursorColor: Colors.white,
         keyboardType: TextInputType.number,
         maxLines: 1,
         decoration: InputDecoration(
@@ -100,8 +101,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               ),
             ),
           ),
-          fillColor: Colors.white,
-          hoverColor: Colors.white,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
           enabledBorder:
               const UnderlineInputBorder(borderSide: BorderSide.none),

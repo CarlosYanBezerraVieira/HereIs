@@ -8,8 +8,15 @@ class CepRepository extends ChangeNotifier {
   final List<CepModel> _ceps = [];
   UnmodifiableListView<CepModel> get ceps => UnmodifiableListView(_ceps);
 
+  final loading = ValueNotifier(false);
+
   void addCEP({required CepModel cep}) {
     _ceps.add(cep);
+    notifyListeners();
+  }
+
+  showLoading({required bool value}) {
+    loading.value = value;
     notifyListeners();
   }
 
