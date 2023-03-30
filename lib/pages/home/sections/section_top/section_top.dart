@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/core/routes/enums/type_of_ceps_enum.dart';
 import 'package:hereis/pages/home/sections/section_top/widget/text_field_widget.dart';
 import 'package:hereis/repositoreis/cep_repository.dart';
 import 'package:provider/provider.dart';
@@ -7,10 +6,10 @@ import 'package:provider/provider.dart';
 import 'widget/card_of_filter.dart';
 
 class SectionTop extends StatelessWidget {
-  final Function({required TypesOfCepsEnum value}) changeFilter;
-  final TypesOfCepsEnum selectedFilter;
+  final Function({required bool value}) changeFilter;
+  final bool showCEPIsSave;
   const SectionTop(
-      {Key? key, required this.changeFilter, required this.selectedFilter})
+      {Key? key, required this.changeFilter, required this.showCEPIsSave})
       : super(key: key);
 
   @override
@@ -29,20 +28,25 @@ class SectionTop extends StatelessWidget {
                 child: TextFieldWidget(
                   callback: (model) {
                     Provider.of<CepRepository>(context, listen: false)
-                        .addCEP(cep: model);
+                        .saveCEP(cep: model);
                   },
                 ),
               ),
               Wrap(
                 spacing: 12,
                 children: [
-                  ...TypesOfCepsEnum.values.map(
-                    (filter) => CardOfFilter(
-                      label: filter.label,
-                      selected: filter == selectedFilter,
-                      onPressed: () => changeFilter(
-                        value: filter,
-                      ),
+                  CardOfFilter(
+                    label: 'Todos',
+                    selected: !showCEPIsSave,
+                    onPressed: () => changeFilter(
+                      value: false,
+                    ),
+                  ),
+                  CardOfFilter(
+                    label: 'Salvos',
+                    selected: !showCEPIsSave,
+                    onPressed: () => changeFilter(
+                      value: true,
                     ),
                   ),
                 ],

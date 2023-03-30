@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/core/routes/enums/type_of_ceps_enum.dart';
 import 'package:hereis/pages/home/sections/section_background.dart';
 import 'package:hereis/repositoreis/cep_repository.dart';
 import 'package:provider/provider.dart';
@@ -16,11 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late TypesOfCepsEnum typeOfCepSelected;
+  late bool showCEPIsSave;
 
   @override
   void initState() {
-    typeOfCepSelected = TypesOfCepsEnum.all;
+    showCEPIsSave = false;
     super.initState();
   }
 
@@ -35,10 +34,10 @@ class _HomePageState extends State<HomePage> {
           return SectionBackground(
             children: [
               SectionTop(
-                selectedFilter: typeOfCepSelected,
-                changeFilter: ({required TypesOfCepsEnum value}) {
+                showCEPIsSave: showCEPIsSave,
+                changeFilter: ({required bool value}) {
                   setState(() {
-                    typeOfCepSelected = value;
+                    showCEPIsSave = value;
                   });
                 },
               ),
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   List<CepModel> filterCEPs({required List<CepModel> ceps}) {
     return ceps
         .where(
-          (element) => element.type == typeOfCepSelected,
+          (element) => element.isSave == showCEPIsSave,
         )
         .toList();
   }
