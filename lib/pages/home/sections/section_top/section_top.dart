@@ -44,7 +44,7 @@ class SectionTop extends StatelessWidget {
                   ),
                   CardOfFilter(
                     label: 'Salvos',
-                    selected: !showCEPIsSave,
+                    selected: showCEPIsSave,
                     onPressed: () => changeFilter(
                       value: true,
                     ),
