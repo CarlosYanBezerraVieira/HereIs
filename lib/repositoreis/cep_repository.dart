@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hereis/core/routes/enums/box_name_enum.dart';
 import 'package:hereis/database/db.dart';
