@@ -1,0 +1,1 @@
+enum BoxNameEnum { ceps, mode }
