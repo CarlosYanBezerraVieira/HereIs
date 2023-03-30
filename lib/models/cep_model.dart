@@ -1,17 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:hereis/core/routes/enums/type_of_ceps_enum.dart';
+import 'package:hive/hive.dart';
+part 'cep_model.g.dart';
 
-class CepModel {
+@HiveType(typeId: 0)
+class CepModel extends HiveObject {
+  @HiveField(0)
   final String cep;
+  @HiveField(1)
   final String street;
+  @HiveField(2)
   final String city;
+  @HiveField(3)
   final String uf;
+  @HiveField(4)
   final String neighborhood;
+  @HiveField(5)
   final String complement;
+  @HiveField(6)
   final String ddd;
-  final TypesOfCepsEnum type;
+  @HiveField(7)
+  final bool isSave;
   CepModel({
     required this.cep,
     required this.street,
@@ -20,7 +30,7 @@ class CepModel {
     required this.neighborhood,
     required this.complement,
     required this.ddd,
-    this.type = TypesOfCepsEnum.all,
+    this.isSave = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -32,7 +42,7 @@ class CepModel {
       'neighborhood': neighborhood,
       'complemento': complement,
       'ddd': ddd,
-      'type': type.name,
+      'isSave': isSave
     };
   }
 
@@ -55,6 +65,6 @@ class CepModel {
 
   @override
   String toString() {
-    return 'CepModel(cep: $cep, street: $street, city: $city, state: $uf, neighborhood: $neighborhood, complemento: $complement, ddd: $ddd, type: $type)';
+    return 'CepModel(cep: $cep, street: $street, city: $city, uf: $uf, neighborhood: $neighborhood, complement: $complement, ddd: $ddd, isSave: $isSave)';
   }
 }
