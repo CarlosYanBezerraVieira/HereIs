@@ -37,7 +37,7 @@ class SectionTop extends StatelessWidget {
                 spacing: 12,
                 children: [
                   CardOfFilter(
-                    label: 'Todos',
+                    label: 'Histórico',
                     selected: !showCEPsFavorites,
                     onPressed: () => changeFilter(
                       value: false,

@@ -11,7 +11,7 @@ class CepRepository extends ChangeNotifier {
   final loading = ValueNotifier(false);
 
   void addCEP({required CepModel cep}) {
-    _ceps.add(cep);
+    _ceps.insert(0, cep);
     notifyListeners();
   }
 
