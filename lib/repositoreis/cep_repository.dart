@@ -37,7 +37,6 @@ class CepRepository extends ChangeNotifier {
   }
 
   Future<void> saveCEP({required CepModel cep}) async {
-    addCEP(cep: cep);
     await DB.intance.put(
       boxName: BoxNameEnum.ceps,
       key: cep.cep,
@@ -50,5 +49,12 @@ class CepRepository extends ChangeNotifier {
       boxName: BoxNameEnum.ceps,
       key: cep,
     );
+  }
+
+  saveContact({required bool isSave, required CepModel cep}) {
+    final index = _ceps.indexOf(cep);
+    _ceps[index] = _ceps[index].copyWith(isSave: isSave);
+    notifyListeners();
+    saveCEP(cep: _ceps[index]);
   }
 }
