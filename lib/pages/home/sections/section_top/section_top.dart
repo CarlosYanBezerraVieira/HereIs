@@ -28,7 +28,8 @@ class SectionTop extends StatelessWidget {
                 child: TextFieldWidget(
                   callback: (model) {
                     Provider.of<CepRepository>(context, listen: false)
-                        .saveCEP(cep: model);
+                      ..saveCEP(cep: model)
+                      ..addCEP(cep: model);
                   },
                 ),
               ),

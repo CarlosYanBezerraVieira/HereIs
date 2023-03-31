@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+
 part 'cep_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -66,5 +67,27 @@ class CepModel extends HiveObject {
   @override
   String toString() {
     return 'CepModel(cep: $cep, street: $street, city: $city, uf: $uf, neighborhood: $neighborhood, complement: $complement, ddd: $ddd, isSave: $isSave)';
+  }
+
+  CepModel copyWith({
+    String? cep,
+    String? street,
+    String? city,
+    String? uf,
+    String? neighborhood,
+    String? complement,
+    String? ddd,
+    bool? isSave,
+  }) {
+    return CepModel(
+      cep: cep ?? this.cep,
+      street: street ?? this.street,
+      city: city ?? this.city,
+      uf: uf ?? this.uf,
+      neighborhood: neighborhood ?? this.neighborhood,
+      complement: complement ?? this.complement,
+      ddd: ddd ?? this.ddd,
+      isSave: isSave ?? this.isSave,
+    );
   }
 }
