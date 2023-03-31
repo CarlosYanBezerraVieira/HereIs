@@ -24,7 +24,7 @@ class CepModelAdapter extends TypeAdapter<CepModel> {
       neighborhood: fields[4] as String,
       complement: fields[5] as String,
       ddd: fields[6] as String,
-      isSave: fields[7] as bool,
+      isFavorite: fields[7] as bool,
     );
   }
 
@@ -47,7 +47,7 @@ class CepModelAdapter extends TypeAdapter<CepModel> {
       ..writeByte(6)
       ..write(obj.ddd)
       ..writeByte(7)
-      ..write(obj.isSave);
+      ..write(obj.isFavorite);
   }
 
   @override

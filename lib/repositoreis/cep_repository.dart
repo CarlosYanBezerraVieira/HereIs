@@ -51,9 +51,9 @@ class CepRepository extends ChangeNotifier {
     );
   }
 
-  saveContact({required bool isSave, required CepModel cep}) {
+  saveContact({required bool isFavorite, required CepModel cep}) {
     final index = _ceps.indexOf(cep);
-    _ceps[index] = _ceps[index].copyWith(isSave: isSave);
+    _ceps[index] = _ceps[index].copyWith(isFavorite: isFavorite);
     notifyListeners();
     saveCEP(cep: _ceps[index]);
   }

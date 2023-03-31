@@ -22,7 +22,7 @@ class CepModel extends HiveObject {
   @HiveField(6)
   final String ddd;
   @HiveField(7)
-  final bool isSave;
+  final bool isFavorite;
   CepModel({
     required this.cep,
     required this.street,
@@ -31,7 +31,7 @@ class CepModel extends HiveObject {
     required this.neighborhood,
     required this.complement,
     required this.ddd,
-    this.isSave = false,
+    this.isFavorite = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -43,7 +43,7 @@ class CepModel extends HiveObject {
       'neighborhood': neighborhood,
       'complemento': complement,
       'ddd': ddd,
-      'isSave': isSave
+      'isFavorite': isFavorite
     };
   }
 
@@ -66,7 +66,7 @@ class CepModel extends HiveObject {
 
   @override
   String toString() {
-    return 'CepModel(cep: $cep, street: $street, city: $city, uf: $uf, neighborhood: $neighborhood, complement: $complement, ddd: $ddd, isSave: $isSave)';
+    return 'CepModel(cep: $cep, street: $street, city: $city, uf: $uf, neighborhood: $neighborhood, complement: $complement, ddd: $ddd, isFavorite: $isFavorite)';
   }
 
   CepModel copyWith({
@@ -77,7 +77,7 @@ class CepModel extends HiveObject {
     String? neighborhood,
     String? complement,
     String? ddd,
-    bool? isSave,
+    bool? isFavorite,
   }) {
     return CepModel(
       cep: cep ?? this.cep,
@@ -87,7 +87,7 @@ class CepModel extends HiveObject {
       neighborhood: neighborhood ?? this.neighborhood,
       complement: complement ?? this.complement,
       ddd: ddd ?? this.ddd,
-      isSave: isSave ?? this.isSave,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 }

@@ -47,7 +47,7 @@ class ItemCard extends StatelessWidget {
                   Colors.white,
                 ),
                 checkColor: Colors.black,
-                value: model.isSave,
+                value: model.isFavorite,
                 onChanged: onChanged,
               )
             ],

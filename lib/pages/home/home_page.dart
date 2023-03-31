@@ -11,11 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late bool showCEPIsSave;
+  late bool showCEPsFavorites;
 
   @override
   void initState() {
-    showCEPIsSave = false;
+    showCEPsFavorites = false;
     super.initState();
   }
 
@@ -28,16 +28,16 @@ class _HomePageState extends State<HomePage> {
       body: SectionBackground(
         children: [
           SectionTop(
-            showCEPIsSave: showCEPIsSave,
+            showCEPsFavorites: showCEPsFavorites,
             changeFilter: ({required bool value}) {
               setState(() {
-                showCEPIsSave = value;
+                showCEPsFavorites = value;
               });
             },
           ),
           Expanded(
             child: SectionListOfCards(
-              showCEPIsSave: showCEPIsSave,
+              showCEPsFavorites: showCEPsFavorites,
             ),
           )
         ],
