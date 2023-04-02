@@ -7,9 +7,9 @@ import 'widget/card_of_filter.dart';
 
 class SectionTop extends StatelessWidget {
   final Function({required bool value}) changeFilter;
-  final bool showCEPsFavorites;
+  final bool showCEPIsFavorites;
   const SectionTop(
-      {Key? key, required this.changeFilter, required this.showCEPsFavorites})
+      {Key? key, required this.changeFilter, required this.showCEPIsFavorites})
       : super(key: key);
 
   @override
@@ -38,14 +38,14 @@ class SectionTop extends StatelessWidget {
                 children: [
                   CardOfFilter(
                     label: 'Histórico',
-                    selected: !showCEPsFavorites,
+                    selected: !showCEPIsFavorites,
                     onPressed: () => changeFilter(
                       value: false,
                     ),
                   ),
                   CardOfFilter(
                     label: 'Favoritos',
-                    selected: showCEPsFavorites,
+                    selected: showCEPIsFavorites,
                     onPressed: () => changeFilter(
                       value: true,
                     ),
