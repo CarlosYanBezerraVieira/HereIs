@@ -17,27 +17,21 @@ class SectionListOfCards extends StatelessWidget {
         final cepsFilter = filterCEPs(ceps: cepRepository.ceps);
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              children: [
-                ...List.generate(
-                  cepsFilter.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: ItemCard(
-                      model: cepsFilter[index],
-                      onChanged: (value) {
-                        cepRepository.saveContact(
-                          isFavorite: value ?? false,
-                          cep: cepsFilter[index],
-                        );
-                      },
-                    ),
-                  ),
+          child: Column(
+            children: [
+              ...List.generate(
+                cepsFilter.length,
+                (index) => ItemCard(
+                  model: cepsFilter[index],
+                  onChanged: (value) {
+                    cepRepository.changeIsSaveOfCEP(
+                      isFavorite: value ?? false,
+                      cep: cepsFilter[index],
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
