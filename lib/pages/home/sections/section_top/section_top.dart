@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hereis/pages/home/sections/section_top/widget/text_field_widget.dart';
-import 'package:hereis/repositoreis/cep_repository.dart';
-import 'package:provider/provider.dart';
 
 import 'widget/card_of_filter.dart';
 
@@ -23,15 +21,9 @@ class SectionTop extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 64, bottom: 32),
-                child: TextFieldWidget(
-                  callback: (model) {
-                    Provider.of<CepRepository>(context, listen: false)
-                      ..saveCEP(cep: model)
-                      ..addCEP(cep: model);
-                  },
-                ),
+              const Padding(
+                padding: EdgeInsets.only(top: 64, bottom: 32),
+                child: TextFieldWidget(),
               ),
               Wrap(
                 spacing: 12,

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/models/cep_model.dart';
-import 'package:hereis/services/via_cep_service.dart';
+import 'package:hereis/repositoreis/cep_repository.dart';
+import 'package:provider/provider.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  final Function(CepModel value) callback;
-  const TextFieldWidget({super.key, required this.callback});
+  const TextFieldWidget({
+    super.key,
+  });
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
-  bool loading = false;
   late TextEditingController searchController;
 
   @override
@@ -50,7 +50,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 12),
             child: Visibility(
-              visible: !loading,
+              visible: !Provider.of<CepRepository>(context).loading,
               replacement: const SizedBox(
                   width: 20,
                   height: 20,
@@ -60,31 +60,17 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   )),
               child: GestureDetector(
                 onTap: () async {
-                  try {
-                    setState(() {
-                      loading = true;
-                    });
-                    final result = await ViaCepService.searchCEP(
-                        cep: searchController.text);
-                    widget.callback(result);
-                    // ignore: use_build_context_synchronously
+                  if (searchController.text.isNotEmpty) {
+                    Provider.of<CepRepository>(context, listen: false)
+                        .searchCEP(
+                            context: context, search: searchController.text);
+                  } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
-                        'CEP encontrado com sucesso!',
-                      ),
-                      backgroundColor: Colors.green,
-                    ));
-                  } on Exception catch (_) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                        'Requisição inválida, revise os dados!',
+                        'Por favor preencha os dados.',
                       ),
                       backgroundColor: Colors.red,
                     ));
-                  } finally {
-                    setState(() {
-                      loading = false;
-                    });
                   }
                 },
                 child: Container(
