@@ -16,7 +16,10 @@ class DB {
     if (_database == null) {
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
-      Hive.registerAdapter(CepModelAdapter());
+      if (!Hive.isAdapterRegistered(0)) {
+        Hive.registerAdapter(CepModelAdapter());
+      }
+
       _database = await BoxCollection.open(
         'database',
         {'ceps', 'mode'},
