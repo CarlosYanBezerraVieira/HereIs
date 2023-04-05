@@ -50,7 +50,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 12),
             child: Visibility(
-              visible: !Provider.of<CepRepository>(context).loading,
+              visible: !Provider.of<CepRepository>(context).loadingSearch,
               replacement: const SizedBox(
                   width: 20,
                   height: 20,

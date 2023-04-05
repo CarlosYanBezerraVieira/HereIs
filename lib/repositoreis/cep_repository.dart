@@ -10,6 +10,7 @@ class CepRepository extends ChangeNotifier {
   final List<CepModel> _ceps = [];
   final List<CepModel> _historyOfCEPs = [];
 
+  final _loadingSearch = ValueNotifier(false);
   final _loading = ValueNotifier(false);
   final _showCEPIsFavorites = ValueNotifier(false);
 
@@ -19,10 +20,16 @@ class CepRepository extends ChangeNotifier {
   List<CepModel> get historyOfCEPs => _historyOfCEPs;
 
   bool get showCEPIsFavorites => _showCEPIsFavorites.value;
+  bool get loadingSearch => _loadingSearch.value;
   bool get loading => _loading.value;
 
   final GlobalKey<AnimatedListState> keyIsFavorite = GlobalKey();
   final GlobalKey<AnimatedListState> keyHistoryOfCEPs = GlobalKey();
+
+  showLoadingSearch({required bool value}) {
+    _loadingSearch.value = value;
+    notifyListeners();
+  }
 
   showLoading({required bool value}) {
     _loading.value = value;
@@ -107,6 +114,7 @@ class CepRepository extends ChangeNotifier {
   }
 
   populate() async {
+    showLoading(value: true);
     if (!_hasPopulate) {
       await initRepository();
 
@@ -126,6 +134,7 @@ class CepRepository extends ChangeNotifier {
       _historyOfCEPs.addAll(historyOfCEPsIn);
       _hasPopulate = true;
     }
+    showLoading(value: false);
   }
 
   bool hasCEP({required CepModel cep}) =>
@@ -134,7 +143,7 @@ class CepRepository extends ChangeNotifier {
 
   searchCEP({required String search, required BuildContext context}) async {
     try {
-      showLoading(value: true);
+      showLoadingSearch(value: true);
 
       final result = await ViaCepService.searchCEP(cep: search);
 
@@ -169,7 +178,7 @@ class CepRepository extends ChangeNotifier {
         backgroundColor: Colors.red,
       ));
     } finally {
-      showLoading(value: false);
+      showLoadingSearch(value: false);
     }
   }
 }
