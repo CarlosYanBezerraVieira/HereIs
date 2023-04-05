@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hereis/pages/home/sections/section_top/widget/text_field_widget.dart';
+import 'package:hereis/repositoreis/cep_repository.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 import 'widget/card_of_filter.dart';
 
@@ -12,6 +15,7 @@ class SectionTop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Padding(
@@ -43,7 +47,78 @@ class SectionTop extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              if (Provider.of<CepRepository>(context).loading)
+                const Padding(
+                  padding: EdgeInsets.only(top: 80),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              if (Provider.of<CepRepository>(context).historyOfCEPs.isEmpty &&
+                  !showCEPIsFavorites &&
+                  !Provider.of<CepRepository>(context).loading)
+                Container(
+                  margin: const EdgeInsets.only(top: 30),
+                  height: 150,
+                  width: width,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.white)),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: LottieBuilder.network(
+                            height: 150,
+                            width: 150,
+                            filterQuality: FilterQuality.high,
+                            "https://assets8.lottiefiles.com/private_files/lf30_k6fpeaa5.json"),
+                      ),
+                      const Text(
+                        "Nenhum CEP encontrado, faça pesquisas.",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              if (Provider.of<CepRepository>(context).cepsIsFavorite.isEmpty &&
+                  showCEPIsFavorites &&
+                  !Provider.of<CepRepository>(context).loading)
+                Container(
+                  margin: const EdgeInsets.only(top: 30),
+                  height: 150,
+                  width: width,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.white)),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: LottieBuilder.network(
+                            height: 150,
+                            width: 150,
+                            filterQuality: FilterQuality.high,
+                            "https://assets8.lottiefiles.com/private_files/lf30_k6fpeaa5.json"),
+                      ),
+                      const Text(
+                        "Adicione CEPs aos favoritos através do histórico.",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),
