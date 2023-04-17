@@ -31,7 +31,23 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return FutureBuilder(
         future: isOnline(),
         builder: (context, online) {
-          if (online.data ?? true) {
+          if (online.connectionState == ConnectionState.waiting &&
+              online.data == null) {
+            return Container(
+              color: const Color(0xff38c172),
+              child: const Center(
+                child: SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 10,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            );
+          }
+          if (online.data ?? false) {
             return Container(
               color: const Color(0xff38c172),
               child: Column(
@@ -110,14 +126,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         });
   }
 
-  static Future<bool> isOnline() async {
+  Future<bool> isOnline() async {
     try {
-      final url = Uri.parse('https://www.google.com.br/');
-      await http.get(url);
+      final url = Uri.parse('https://viacep.com.br/ws/63031000/json/');
+      await http.get(url).timeout(const Duration(seconds: 1));
 
       return true;
-    } catch (e) {
-      throw false;
+    } catch (_) {
+      return false;
     }
   }
 }
