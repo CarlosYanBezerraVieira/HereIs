@@ -82,7 +82,7 @@ class CepRepository extends ChangeNotifier {
             onChanged: (value) {},
           ),
         ),
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 500),
       );
       _historyOfCEPs.remove(cep);
     }
@@ -96,7 +96,7 @@ class CepRepository extends ChangeNotifier {
             onChanged: (value) {},
           ),
         ),
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(seconds: 1),
       );
       _cepsIsFavorite.remove(cep);
     }
@@ -150,7 +150,7 @@ class CepRepository extends ChangeNotifier {
       if (!hasCEP(cep: result)) {
         _historyOfCEPs.insert(0, result);
         keyHistoryOfCEPs.currentState!
-            .insertItem(0, duration: const Duration(milliseconds: 300));
+            .insertItem(0, duration: const Duration(milliseconds: 500));
         notifyListeners();
         saveCEP(cep: result);
 

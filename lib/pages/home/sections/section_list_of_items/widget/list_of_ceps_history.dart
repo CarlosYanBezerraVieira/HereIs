@@ -37,18 +37,23 @@ class _ListOfCepsHistoryState extends State<ListOfCepsHistory> {
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index, animation) {
         if (widget.ceps.isNotEmpty) {
-          return SizeTransition(
-            key: UniqueKey(),
-            sizeFactor: animation,
-            child: ItemCard(
-              model: widget.ceps[index],
-              onChanged: (value) {
-                widget.changeIsSaveOfCEP(
-                  cep: widget.ceps[index],
-                  isFavorite: false,
-                );
-              },
-            ),
+          return SlideTransition(
+            position: animation.drive(
+                Tween(begin: const Offset(0, 1), end: const Offset(0, 0))),
+            child: FadeTransition(
+                opacity: animation,
+                child: SizeTransition(
+                    key: UniqueKey(),
+                    sizeFactor: animation,
+                    child: ItemCard(
+                      model: widget.ceps[index],
+                      onChanged: (value) {
+                        widget.changeIsSaveOfCEP(
+                          cep: widget.ceps[index],
+                          isFavorite: false,
+                        );
+                      },
+                    ))),
           );
         }
         return const SizedBox.shrink();

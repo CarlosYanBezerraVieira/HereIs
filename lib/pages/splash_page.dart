@@ -31,22 +31,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return FutureBuilder(
         future: isOnline(),
         builder: (context, online) {
-          if (online.connectionState == ConnectionState.waiting &&
-              online.data == null) {
-            return Container(
-              color: const Color(0xff38c172),
-              child: const Center(
-                child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 10,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            );
-          }
           if (online.data ?? false) {
             return Container(
               color: const Color(0xff38c172),
