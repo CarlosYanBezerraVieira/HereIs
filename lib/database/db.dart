@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../core/routes/enums/box_name_enum.dart';
+import '../core/enums/box_name_enum.dart';
 import '../models/cep_model.dart';
 
 class DB {

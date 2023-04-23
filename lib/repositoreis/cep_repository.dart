@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hereis/core/routes/enums/box_name_enum.dart';
+import 'package:hereis/core/enums/box_name_enum.dart';
 import 'package:hereis/database/db.dart';
 import '../models/cep_model.dart';
 import '../pages/home/sections/section_list_of_items/widget/item_card.dart';
