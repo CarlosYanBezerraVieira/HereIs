@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 
+import '../../../core/gifs/gifs.dart';
 import 'section_is_empty.dart';
 
 class SectionBackground extends StatelessWidget {
@@ -15,11 +16,12 @@ class SectionBackground extends StatelessWidget {
       children: [
         Positioned(
           bottom: 0,
-          child: LottieBuilder.network(
-              height: height / 2,
-              filterQuality: FilterQuality.high,
-              fit: BoxFit.cover,
-              "https://assets2.lottiefiles.com/packages/lf20_mksle47o.json"),
+          child: LottieBuilder.asset(
+            height: height / 2,
+            filterQuality: FilterQuality.high,
+            fit: BoxFit.cover,
+            Gifs.map,
+          ),
         ),
         Container(
           height: height / 2,

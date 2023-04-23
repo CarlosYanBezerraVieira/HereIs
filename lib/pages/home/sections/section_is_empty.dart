@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/gifs/gifs.dart';
 import '../../../repositoreis/cep_repository.dart';
 
 class SectionIsEmpty extends StatelessWidget {
@@ -35,11 +36,12 @@ class SectionIsEmpty extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: LottieBuilder.network(
-                height: 150,
-                width: 150,
-                filterQuality: FilterQuality.high,
-                "https://assets8.lottiefiles.com/private_files/lf30_k6fpeaa5.json"),
+            child: LottieBuilder.asset(
+              height: 150,
+              width: 150,
+              filterQuality: FilterQuality.high,
+              Gifs.notFound,
+            ),
           ),
           Text(
             description,

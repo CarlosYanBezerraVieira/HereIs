@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../core/gifs/gifs.dart';
 import 'home/home_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,14 +32,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return FutureBuilder(
         future: isOnline(),
         builder: (context, online) {
-          if (online.data ?? false) {
+          if (online.data ?? true) {
             return Container(
               color: const Color(0xff38c172),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  LottieBuilder.network(
-                    "https://assets3.lottiefiles.com/packages/lf20_hr4apm5d.json",
+                  LottieBuilder.asset(
+                    Gifs.search,
                     controller: _controller,
                     onLoaded: (compos) {
                       _controller
