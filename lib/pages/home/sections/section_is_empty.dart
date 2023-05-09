@@ -58,14 +58,17 @@ class SectionIsEmpty extends StatelessWidget {
 
   Future<Widget> showCardNotfound({required CepRepository repository}) async {
     {
-      if (repository.showCEPIsFavorites && repository.cepsIsFavorite.isEmpty) {
-        return cardNotFound(
-            description: "Adicione CEPs aos favoritos através do histórico.");
-      }
-      if (!repository.showCEPIsFavorites && repository.historyOfCEPs.isEmpty) {
-        return cardNotFound(
-          description: "Nenhum CEP encontrado, faça pesquisas.",
-        );
+      if (!repository.loading) {
+        if (repository.showCEPIsFavorites &&
+            repository.cepsIsFavorite.isEmpty) {
+          return cardNotFound(
+              description: "Adicione CEPs aos favoritos através do histórico.");
+        } else if (!repository.showCEPIsFavorites &&
+            repository.historyOfCEPs.isEmpty) {
+          return cardNotFound(
+            description: "Nenhum CEP encontrado, faça pesquisas.",
+          );
+        }
       }
 
       return const SizedBox.shrink();

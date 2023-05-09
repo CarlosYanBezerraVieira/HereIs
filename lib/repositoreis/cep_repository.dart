@@ -11,6 +11,7 @@ class CepRepository extends ChangeNotifier {
   final List<CepModel> _historyOfCEPs = [];
 
   final _loadingSearch = ValueNotifier(false);
+  final _loading = ValueNotifier(true);
   final _showCEPIsFavorites = ValueNotifier(false);
 
   bool _hasPopulate = false;
@@ -20,12 +21,18 @@ class CepRepository extends ChangeNotifier {
 
   bool get showCEPIsFavorites => _showCEPIsFavorites.value;
   bool get loadingSearch => _loadingSearch.value;
+  bool get loading => _loading.value;
 
   final GlobalKey<AnimatedListState> keyIsFavorite = GlobalKey();
   final GlobalKey<AnimatedListState> keyHistoryOfCEPs = GlobalKey();
 
   showLoadingSearch({required bool value}) {
     _loadingSearch.value = value;
+    notifyListeners();
+  }
+
+  showLoading({required bool value}) {
+    _loading.value = value;
     notifyListeners();
   }
 
@@ -51,11 +58,12 @@ class CepRepository extends ChangeNotifier {
     );
   }
 
-  Future<void> deleteCEP({required String cep}) async {
+  Future<void> deleteCEP({required CepModel cep}) async {
     DB.intance.delete(
       boxName: BoxNameEnum.ceps,
-      key: cep,
+      key: cep.cep,
     );
+    removeItemAnimated(isFavorite: showCEPIsFavorites, cep: cep);
   }
 
   void changeIsSaveOfCEP({required bool isFavorite, required CepModel cep}) {
@@ -71,6 +79,7 @@ class CepRepository extends ChangeNotifier {
         (_, animation) => SizeTransition(
           sizeFactor: animation,
           child: ItemCard(
+            deleteItem: (value) {},
             model: cep,
             onChanged: (value) {},
           ),
@@ -85,6 +94,7 @@ class CepRepository extends ChangeNotifier {
         (_, animation) => SizeTransition(
           sizeFactor: animation,
           child: ItemCard(
+            deleteItem: (value) {},
             model: cep,
             onChanged: (value) {},
           ),
@@ -107,6 +117,7 @@ class CepRepository extends ChangeNotifier {
   }
 
   populate() async {
+    showLoading(value: true);
     if (!_hasPopulate) {
       await initRepository();
 
@@ -126,6 +137,7 @@ class CepRepository extends ChangeNotifier {
       _historyOfCEPs.addAll(historyOfCEPsIn);
       _hasPopulate = true;
     }
+    showLoading(value: false);
   }
 
   bool hasCEP({required CepModel cep}) =>
@@ -164,7 +176,7 @@ class CepRepository extends ChangeNotifier {
     } on Exception catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
-          'Requisição inválida, revise os dados!',
+          'Requisição inválida, revise os dados ou verifique sua internet.',
         ),
         backgroundColor: Colors.red,
       ));
