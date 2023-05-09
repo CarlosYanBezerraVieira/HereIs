@@ -10,11 +10,13 @@ class ListOfCepsHistory extends StatefulWidget {
   final List<CepModel> ceps;
   final Function({required bool isFavorite, required CepModel cep})
       changeIsSaveOfCEP;
+  final Function(CepModel) deleteItem;
   const ListOfCepsHistory(
       {super.key,
       required this.ceps,
       required this.changeIsSaveOfCEP,
-      required this.keyList});
+      required this.keyList,
+      required this.deleteItem});
 
   @override
   State<ListOfCepsHistory> createState() => _ListOfCepsHistoryState();
@@ -46,6 +48,7 @@ class _ListOfCepsHistoryState extends State<ListOfCepsHistory> {
                     key: UniqueKey(),
                     sizeFactor: animation,
                     child: ItemCard(
+                      deleteItem: (cep) => widget.deleteItem(cep),
                       model: widget.ceps[index],
                       onChanged: (value) {
                         widget.changeIsSaveOfCEP(

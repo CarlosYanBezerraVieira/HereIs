@@ -6,13 +6,15 @@ import 'item_card.dart';
 class ListOfCepsIsFavorite extends StatelessWidget {
   final Key keyList;
   final List<CepModel> ceps;
+  final Function(CepModel) deleteItem;
   final Function({required bool isFavorite, required CepModel cep})
       changeIsSaveOfCEP;
   const ListOfCepsIsFavorite(
       {super.key,
       required this.ceps,
       required this.changeIsSaveOfCEP,
-      required this.keyList});
+      required this.keyList,
+      required this.deleteItem});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class ListOfCepsIsFavorite extends StatelessWidget {
             key: UniqueKey(),
             sizeFactor: animation,
             child: ItemCard(
+              deleteItem: (cep) => deleteItem(cep),
               model: ceps[index],
               onChanged: (value) {
                 changeIsSaveOfCEP(

@@ -16,11 +16,17 @@ class SectionListOfCards extends StatelessWidget {
         return Visibility(
           visible: showCEPIsFavorites,
           replacement: ListOfCepsHistory(
+            deleteItem: (cep) {
+              cepRepository.deleteCEP(cep: cep);
+            },
             ceps: cepRepository.historyOfCEPs,
             changeIsSaveOfCEP: cepRepository.changeIsSaveOfCEP,
             keyList: cepRepository.keyHistoryOfCEPs,
           ),
           child: ListOfCepsIsFavorite(
+            deleteItem: (cep) {
+              cepRepository.deleteCEP(cep: cep);
+            },
             ceps: cepRepository.cepsIsFavorite,
             changeIsSaveOfCEP: cepRepository.changeIsSaveOfCEP,
             keyList: cepRepository.keyIsFavorite,

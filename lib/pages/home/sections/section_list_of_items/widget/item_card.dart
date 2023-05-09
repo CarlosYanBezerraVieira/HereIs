@@ -4,7 +4,12 @@ import 'package:hereis/models/cep_model.dart';
 class ItemCard extends StatelessWidget {
   final CepModel model;
   final Function(bool? value) onChanged;
-  const ItemCard({Key? key, required this.model, required this.onChanged})
+  final Function(CepModel cep) deleteItem;
+  const ItemCard(
+      {Key? key,
+      required this.model,
+      required this.onChanged,
+      required this.deleteItem})
       : super(key: key);
 
   @override
@@ -59,49 +64,61 @@ class ItemCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  model.street,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        model.street,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Text(
+                              model.city,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          if (model.city.isNotEmpty &&
+                              model.neighborhood.isNotEmpty)
+                            const Text(
+                              " | ",
+                            ),
+                          Flexible(
+                            flex: 1,
+                            child: Text(
+                              model.neighborhood,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        model.city,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    if (model.city.isNotEmpty && model.neighborhood.isNotEmpty)
-                      const Text(
-                        " | ",
-                      ),
-                    Flexible(
-                      flex: 1,
-                      child: Text(
-                        model.neighborhood,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                IconButton(
+                    onPressed: () {
+                      deleteItem(model);
+                    },
+                    icon: const Icon(Icons.delete))
               ],
             ),
           ),
